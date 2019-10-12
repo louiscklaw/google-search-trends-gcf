@@ -11,4 +11,6 @@ module.exports = {
   Q_REAL_TIME_TRENDS: "realTimeTrends",
   Q_RELATED_QUERIES: "relatedQueries",
   Q_RELATED_TOPICS: "relatedTopics",
+
+  ERR_GET_CALL_METHOD_NOT_HANDLED: 'the request method not handled'
 }

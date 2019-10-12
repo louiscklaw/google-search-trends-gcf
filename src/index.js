@@ -6,6 +6,11 @@ const common = require( path.join( __dirname, 'common.js' ) );
 const gcf_util = require( path.join( __dirname, 'gcf_util.js' ) );
 
 
+const get_call_solver = {
+  q: handle_get_q_call,
+  content: handle_get_content_call
+}
+
 const req_solver = {
   'OPTIONS': handle_option_call,
   'GET': handle_get_call,
@@ -50,18 +55,19 @@ function process_search_param( param_in ) {
   } )
   return output_d;
 }
-
+function handle_get_content_call ( req, res ) {
+  return false;
+}
 function handle_get_call( req, res ) {
-  if ( Object.keys( req.query ).indexOf( 'q' ) > -1 ) {
-    handle_get_q_call( req, res );
+  if ( Object.keys( get_call_solver ).includes( Object.keys( req.query )[0] ) ) {
+    get_call_solver[Object.keys( req.query )[0]](req, res);
   } else {
-    send_required_func_not_found( req, res );
+    console.error( vars.ERR_GET_CALL_METHOD_NOT_HANDLED );
+    res.send( vars.ERR_GET_CALL_METHOD_NOT_HANDLED );
   }
 }
 
 function handle_get_q_call ( req, res ) {
-  console.log( 'hello get' );
-
   switch ( req.query.q ) {
     case 'test':
       res.send( 'test OK' );
