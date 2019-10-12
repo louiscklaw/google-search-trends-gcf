@@ -53,4 +53,79 @@ describe( 'test helloworld', () => {
       })
   } )
 
+  it( 'daily trend test call', () => {
+    prepare_json_post_request( TEST_API_SERVER, '/' )
+      .send( {
+        q: vars.Q_DAILY_TRENDS,
+        param: {
+          startTime: '2019-01-01',
+          endTime: '2019-01-02',
+          geo: 'HK'
+        }
+      } )
+      .end( ( err, res ) => {
+        expect( res ).to.be.json;
+      })
+  })
+
+  it( 'interestOverTime test call', () => {
+    prepare_json_post_request( TEST_API_SERVER, '/' )
+      .send( {
+        q: vars.Q_INTEREST_OVER_TIME,
+        param: {
+          startTime: '2019-01-01',
+          endTime: '2019-01-02',
+          geo: 'HK'
+        }
+      } )
+      .end( ( err, res ) => {
+        expect( res ).to.be.json;
+      })
+  })
+
+  it( 'interestByRegion test call', () => {
+    prepare_json_post_request( TEST_API_SERVER, '/' )
+      .send( {
+        q: vars.Q_INTEREST_BY_REGION,
+        param: {
+          startTime: '2019-01-01',
+          endTime: '2019-01-02',
+          geo: 'HK'
+        }
+      } )
+      .end( ( err, res ) => {
+        expect( res ).to.be.json;
+      })
+  })
+
+  it( 'relatedQueries test call', () => {
+    prepare_json_post_request( TEST_API_SERVER, '/' )
+      .send( {
+        q: vars.Q_RELATED_QUERIES,
+        param: {
+          startTime: '2019-01-01',
+          endTime: '2019-01-02',
+          geo: 'HK'
+        }
+      } )
+      .end( ( err, res ) => {
+        expect( res ).to.be.json;
+      })
+  })
+
+  it( 'relatedTopics test call', () => {
+    prepare_json_post_request( TEST_API_SERVER, '/' )
+      .send( {
+        q: vars.Q_RELATED_TOPICS,
+        param: {
+          startTime: '2019-01-01',
+          endTime: '2019-01-02',
+          geo: 'HK'
+        }
+      } )
+      .end( ( err, res ) => {
+        expect( res ).to.be.json;
+      })
+  })
+
 })
