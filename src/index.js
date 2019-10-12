@@ -12,6 +12,10 @@ const req_solver = {
   'POST': handle_post_call
 }
 
+function send_required_func_not_found ( req, res ) {
+  res.send( 'the requested function not found' );
+}
+
 function handle_get_call( req, res ) {
   if ( Object.keys( req.query ).indexOf( 'q' ) > -1 ) {
     handle_get_q_call( req, res );
@@ -20,7 +24,9 @@ function handle_get_call( req, res ) {
   }
 }
 
-function handle_get_q_call( req, res ) {
+function handle_get_q_call ( req, res ) {
+  console.log( 'hello get' );
+
   switch ( req.query.q ) {
     case 'test':
       res.send( 'test OK' );
@@ -38,25 +44,16 @@ function handle_option_call( req, res ) {
   res.status( 204 ).send( '' );
 }
 
-function handle_post_call( req, res ) {
+function handle_post_call ( req, res ) {
+
+
   if ( Object.keys( req.body ).indexOf( 'q' ) > -1 ) {
     handle_post_trends( req, res );
 
+  } else if ( Object.keys( req.body ).includes( 'test' ) ) {
+    res.send(req.body.test)
   } else {
     send_required_func_not_found( req, res );
-  }
-}
-
-function process_GET_del ( req, res ) {
-  switch ( req.query.q ) {
-    case "test":
-      res.send( 'test OK' );
-      break;
-    default:
-      console.error( 'get parameter not supported' );
-      console.error( req.query.q );
-      res.send('get parameter not supported')
-      break;
   }
 }
 

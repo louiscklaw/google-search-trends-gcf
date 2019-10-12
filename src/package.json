@@ -9,11 +9,12 @@
   "nodemonConfig": {
     "delay": "1000",
     "ignore": [
+      "test/*",
       "node_modules/*"
     ]
   },
   "scripts": {
-    "test_api": "nodemon --ext '*.*' --exec mocha",
+    "test_api": "nodemon --ext '*.*' --delay 2 --exec mocha",
     "api_server": "set RUN_ENV=DEBUG && nodemon --delay 0.3 --ext '*.*' api_server.js"
   },
   "repository": {
@@ -29,7 +30,6 @@
   "homepage": "https://github.com/louiscklaw/google-search-trends-v2#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "chai-http": "^4.3.0",
     "express": "^4.17.1",
     "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",

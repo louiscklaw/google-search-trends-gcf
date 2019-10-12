@@ -3,7 +3,7 @@ const path = require( 'path' );
 const express = require( 'express' );
 const app = express();
 
-const gcf_index = require( path.join( __dirname, 'index.js' ) );
+const gcf_index = require( path.join( __dirname, 'src', 'index.js' ) );
 
 app.use(express.urlencoded());
 app.use(express.json());

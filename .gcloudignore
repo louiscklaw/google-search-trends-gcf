@@ -1,7 +1,11 @@
 
-pug
+.git
 api_server.js
 deploy.sh
 .glcoudignore
 test
 api_server.js
+node_modules
+gcf_old
+.gitignore
+.editorconfig
