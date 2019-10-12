@@ -164,7 +164,7 @@ function check_res_is_json ( err, res ) {
 
   return expect( res ).to.be.json;
 }
-Q_RELATED_TOPICS
+
 
 describe( 'google trend api test', () => {
   describe( 'basic loopback', () => {
