@@ -78,7 +78,9 @@ function handle_post_trends( req, res ) {
   if ( found_in_key( trends_solver, req.body.q ) ) {
     console.log( process_search_param( req.body.param ) );
     trends_solver[req.body.q]( process_search_param(req.body.param) )
-      .then( result => res.json( result ) );
+      .then( result => {
+        res.json( JSON.parse(result) );
+      } );
 
   } else {
     console.log( req.body.q );

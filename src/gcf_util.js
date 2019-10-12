@@ -18,7 +18,8 @@ module.exports.relatedQueries = ( search_settings_in ) => {
 }
 
 module.exports.dailyTrends = ( search_settings_in ) => {
-  return googleTrends.dailyTrends( search_settings_in );
+  return googleTrends.dailyTrends( search_settings_in )
+
 }
 
 module.exports.helloworld = () => {
