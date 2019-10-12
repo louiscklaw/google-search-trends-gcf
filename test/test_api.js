@@ -37,7 +37,8 @@ function prepare_get_request ( dest_server, get_end_point ){
     .get( get_end_point );
 }
 
-describe( 'test helloworld', () => {
+
+function api_server_local_get_loopback () {
   it( 'api server local get loopback', () => {
     prepare_get_request( TEST_API_SERVER,'/?q=test' )
       .end( ( err, res ) => {
@@ -45,6 +46,9 @@ describe( 'test helloworld', () => {
         assert( res.text == 'test OK', 'test fail' );
       })
   } )
+}
+
+function api_server_local_post_loopback () {
   it( 'api server local post loopback', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( { 'test': {'foo':'bar'} } )
@@ -53,6 +57,9 @@ describe( 'test helloworld', () => {
       })
   } )
 
+}
+
+function daily_trend_test_call () {
   it( 'daily trend test call', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( {
@@ -63,11 +70,11 @@ describe( 'test helloworld', () => {
           geo: 'HK'
         }
       } )
-      .end( ( err, res ) => {
-        expect( res ).to.be.json;
-      })
+      .end( check_res_is_json)
   })
+}
 
+function interestOverTime_test_call () {
   it( 'interestOverTime test call', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( {
@@ -75,14 +82,15 @@ describe( 'test helloworld', () => {
         param: {
           startTime: '2019-01-01',
           endTime: '2019-01-02',
-          geo: 'HK'
+          geo: 'HK',
+          keyword: 'apple'
         }
       } )
-      .end( ( err, res ) => {
-        expect( res ).to.be.json;
-      })
+      .end( check_res_is_json)
   })
+}
 
+function interestByRegion_test_call () {
   it( 'interestByRegion test call', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( {
@@ -90,14 +98,16 @@ describe( 'test helloworld', () => {
         param: {
           startTime: '2019-01-01',
           endTime: '2019-01-02',
-          geo: 'HK'
+          geo: 'HK',
+          keyword: 'apple'
         }
       } )
-      .end( ( err, res ) => {
-        expect( res ).to.be.json;
-      })
+      .end( check_res_is_json)
   })
 
+}
+
+function relatedQueries_test_call () {
   it( 'relatedQueries test call', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( {
@@ -105,14 +115,16 @@ describe( 'test helloworld', () => {
         param: {
           startTime: '2019-01-01',
           endTime: '2019-01-02',
-          geo: 'HK'
+          geo: 'HK',
+          keyword: 'apple'
         }
       } )
-      .end( ( err, res ) => {
-        expect( res ).to.be.json;
-      })
+      .end( check_res_is_json)
   })
 
+}
+
+function relatedTopics_test_call () {
   it( 'relatedTopics test call', () => {
     prepare_json_post_request( TEST_API_SERVER, '/' )
       .send( {
@@ -120,12 +132,33 @@ describe( 'test helloworld', () => {
         param: {
           startTime: '2019-01-01',
           endTime: '2019-01-02',
-          geo: 'HK'
+          geo: 'HK',
+          keyword: 'apple'
         }
       } )
-      .end( ( err, res ) => {
-        expect( res ).to.be.json;
-      })
+      .end( check_res_is_json )
+  })
+
+}
+
+function check_res_is_json ( err, res ) {
+
+  return expect( res ).to.be.json;
+}
+
+
+describe( 'google trend api test', () => {
+  describe( 'basic loopback', () => {
+    api_server_local_get_loopback();
+    api_server_local_post_loopback();
+  })
+
+  describe( 'google trend api test call', () => {
+    daily_trend_test_call();
+    interestByRegion_test_call();
+    interestOverTime_test_call();
+    relatedQueries_test_call();
+    relatedTopics_test_call();
   })
 
 })
