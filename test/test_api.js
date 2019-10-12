@@ -17,6 +17,11 @@ var should = chai.should();  // Using Should style
 const TEST_SERVER_AND_PORT = 'localhost:8082';
 const TEST_API_SERVER = 'http://' + TEST_SERVER_AND_PORT;
 
+const TEST_CALL_STARTTIME = '2019-01-01';
+const TEST_CALL_ENDTIME = '2019-01-02';
+const TEST_CALL_GEO = 'HK';
+const TEST_CALL_KEYWORD = 'apple';
+
 chai.use(chaiHttp);
 
 function prepare_request ( dest_server ) {
@@ -65,8 +70,8 @@ function daily_trend_test_call () {
       .send( {
         q: vars.Q_DAILY_TRENDS,
         param: {
-          startTime: '2019-01-01',
-          endTime: '2019-01-02',
+          startTime: TEST_CALL_STARTTIME,
+          endTime: TEST_CALL_ENDTIME,
           geo: 'HK'
         }
       } )
@@ -80,10 +85,10 @@ function interestOverTime_test_call () {
       .send( {
         q: vars.Q_INTEREST_OVER_TIME,
         param: {
-          startTime: '2019-01-01',
-          endTime: '2019-01-02',
-          geo: 'HK',
-          keyword: 'apple'
+          startTime: TEST_CALL_STARTTIME,
+          endTime: TEST_CALL_ENDTIME,
+          geo: TEST_CALL_GEO,
+          keyword: TEST_CALL_KEYWORD
         }
       } )
       .end( check_res_is_json)
@@ -96,10 +101,10 @@ function interestByRegion_test_call () {
       .send( {
         q: vars.Q_INTEREST_BY_REGION,
         param: {
-          startTime: '2019-01-01',
-          endTime: '2019-01-02',
-          geo: 'HK',
-          keyword: 'apple'
+          startTime: TEST_CALL_STARTTIME,
+          endTime: TEST_CALL_ENDTIME,
+          geo: TEST_CALL_GEO,
+          keyword: TEST_CALL_KEYWORD
         }
       } )
       .end( check_res_is_json)
@@ -113,10 +118,10 @@ function relatedQueries_test_call () {
       .send( {
         q: vars.Q_RELATED_QUERIES,
         param: {
-          startTime: '2019-01-01',
-          endTime: '2019-01-02',
-          geo: 'HK',
-          keyword: 'apple'
+          startTime: TEST_CALL_STARTTIME,
+          endTime: TEST_CALL_ENDTIME,
+          geo: TEST_CALL_GEO,
+          keyword: TEST_CALL_KEYWORD
         }
       } )
       .end( check_res_is_json)
@@ -130,15 +135,29 @@ function relatedTopics_test_call () {
       .send( {
         q: vars.Q_RELATED_TOPICS,
         param: {
-          startTime: '2019-01-01',
-          endTime: '2019-01-02',
-          geo: 'HK',
-          keyword: 'apple'
+          startTime: TEST_CALL_STARTTIME,
+          endTime: TEST_CALL_ENDTIME,
+          geo: TEST_CALL_GEO,
+          keyword: TEST_CALL_KEYWORD
         }
       } )
       .end( check_res_is_json )
   })
 
+}
+
+function prepare_q_param () {
+  var Obj = {};
+  Obj[param] = {};
+  return Obj;
+}
+
+function q_param_add ( obj_in, param_name, param_value ) {
+  return obj_in[param_name] = param_value;
+}
+
+function q_param_add_startTime (obj_in, startTime_in = '2019-01-01' ) {
+  return q_param_add( obj_in, 'startTime', startTime_in );
 }
 
 function check_res_is_json ( err, res ) {
