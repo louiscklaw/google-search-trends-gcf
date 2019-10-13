@@ -48,7 +48,7 @@ function process_search_param( param_in ) {
   Object.keys( param_in ).forEach( x => {
     switch ( x ) {
       case 'dayBack':
-        console.log( 'dayBack found' );
+        // console.log( 'dayBack found' );
         var n = new Date();
         var startTime = n.getDate() - parseInt(param_in[x]);
         n.setDate( startTime );
@@ -95,7 +95,7 @@ function handle_post_trends( req, res ) {
   // console.log( req.body.trends );
 
   if ( found_in_key( trends_solver, req.body.q ) ) {
-    console.log( process_search_param( req.body.param ) );
+    // console.log( process_search_param( req.body.param ) );
     trends_solver[req.body.q]( process_search_param(req.body.param) )
       .then( result => {
         res.json( JSON.parse(result) );
