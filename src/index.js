@@ -25,6 +25,19 @@ trends_solver[vars.Q_INTEREST_BY_REGION] = gcf_util.interestByRegion;
 trends_solver[vars.Q_RELATED_QUERIES] = gcf_util.relatedQueries
 trends_solver[vars.Q_RELATED_TOPICS] = gcf_util.relatedTopics;
 
+function print_params ( name, val ) {
+  console.log( [name, val].join( ':' ) );
+}
+
+function print_run_config () {
+  console.log( '\n' );
+  console.log( 'print run config:' );
+  console.log( '---------------------------------' );
+  print_params( 'RUN_ENV', vars.RUN_ENV );
+  print_params( 'PAGE_SERVER', vars.PAGE_SERVER );
+  console.log( '---------------------------------' );
+  console.log('\n\n')
+}
 
 function send_required_func_not_found ( req, res ) {
   res.send( 'the requested function not found' );
@@ -120,7 +133,7 @@ function handle_post_call ( req, res ) {
 }
 
 function main_routes ( req, res ) {
-  res.set( 'Access-Control-Allow-Origin', '*' );
+  res.set( 'Access-Control-Allow-Origin', vars.PAGE_SERVER );
 
   if ( Object.keys( req_solver ).indexOf( req.method ) > -1 ) {
     req_solver[ req.method ]( req, res );
@@ -131,4 +144,5 @@ function main_routes ( req, res ) {
   }
 }
 
+print_run_config();
 module.exports.main_routes = main_routes;
