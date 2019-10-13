@@ -14,5 +14,5 @@ module.exports = {
   Q_RELATED_TOPICS: "relatedTopics",
 
   ERR_GET_CALL_METHOD_NOT_HANDLED: 'the request method not handled',
-
+  ERR_SENDING_OUT_RESULT: 'err_sending_out_result'
 }

@@ -91,14 +91,23 @@ function handle_get_q_call ( req, res ) {
   }
 }
 
+function send_response_json ( res, json_in ) {
+  try {
+    res.json( JSON.parse(json_in) );
+  } catch (err) {
+    console.error( vars.ERR_SENDING_OUT_RESULT );
+    console.error( json_in );
+  }
+}
+
 function handle_post_trends( req, res ) {
   // console.log( req.body.trends );
 
   if ( found_in_key( trends_solver, req.body.q ) ) {
     // console.log( process_search_param( req.body.param ) );
     trends_solver[req.body.q]( process_search_param(req.body.param) )
-      .then( result => {
-        res.json( JSON.parse(result) );
+      .then( json_from_google => {
+        send_response_json( res, json_from_google );
       } );
 
   } else {
