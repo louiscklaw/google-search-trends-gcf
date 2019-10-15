@@ -14,7 +14,8 @@
   },
   "scripts": {
     "test_api": "nodemon --ext '*.*' --exec mocha",
-    "test_api_server": "set RUN_ENV=DEBUG && nodemon --delay 0.3 --ext '*.*' api_server.js"
+    "test_api_server": "set RUN_ENV=DEBUG && nodemon --delay 0.3 --ext '*.*' api_server.js",
+    "mon_deploy": "nodemon -w src -w package.json --exec 'sh ./deploy.sh' "
   },
   "repository": {
     "type": "git",

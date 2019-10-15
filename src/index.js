@@ -142,7 +142,7 @@ function handle_post_call ( req, res ) {
 }
 
 function main_routes ( req, res ) {
-  res.set( 'Access-Control-Allow-Origin', vars.PAGE_SERVER );
+  res.set( 'Access-Control-Allow-Origin',"*" );
 
   if ( Object.keys( req_solver ).indexOf( req.method ) > -1 ) {
     req_solver[ req.method ]( req, res );
